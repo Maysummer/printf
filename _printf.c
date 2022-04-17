@@ -1,4 +1,6 @@
 #include <stddef.h>
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
  * _printf - produce output according to a format
@@ -37,7 +39,7 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-	write(i, dest, i++);
+	write(i, str, i++);
 	va_end(ap);
 	return(i);
 }
