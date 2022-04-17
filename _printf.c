@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdarg.h>
 #include <unistd.h>
-
+#include <stdlib.h>
 /**
  * _printf - produce output according to a format
  * @format: main string
@@ -13,6 +13,8 @@ int _printf(const char *format, ...)
 	va_list ap;
 	int i, j;
 	char *str;
+
+	str = malloc(sizeof(char) * 1000);
 
 	if (format == NULL)
 		return (1);
@@ -39,7 +41,7 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-	write(i, str, i++);
+	write(i, str, i + 1);
 	va_end(ap);
 	return(i);
 }
