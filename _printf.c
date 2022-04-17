@@ -41,7 +41,8 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-	write(i, str, i + 1);
+	write(1, str, i + 1);
 	va_end(ap);
+	free(str);
 	return(i);
 }
