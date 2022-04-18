@@ -56,7 +56,10 @@ int print_d(int n)
 		size /= 10;
 	}
 	if (n < 0)
+	{
+		--b;
 		*b = '-';
+	}
 	size = print_s(b);
 	free(a);
 	return (size);
