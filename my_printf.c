@@ -1,18 +1,17 @@
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 
 /**
  * print_c - prints character
- * @a: pointer to the character
+ * @a: character
  *
  * Return: bytes printed
  */
 int print_c(char a)
 {
-	char *b = &a;
-
-	return (write(1, b, 1));
+	return (write(1, &a, 1));
 }
 
 /**
@@ -23,11 +22,44 @@ int print_c(char a)
  */
 int print_s(char *a)
 {
+
 	int i = 0;
 
-	while (a[i++] != '\0')
-		;
+	while (a[i] != '\0')
+		i++;
 	return (write(1, a, i));
+}
+
+/**
+ * print_d - prints an decimal number
+ * @n: the number to be printed
+ *
+ * Return: bytes printed
+ */
+int print_d(int n)
+{
+	int size = sizeof(int) == 4 ? 10 : 5;
+	char *a, *b;
+	
+	if (n < 0)
+		size += 1;
+	a = malloc(sizeof(char) * size);
+	if (a == NULL)
+		return (0);
+	b = &a[size - 1];
+	size = (n < 0 ? -n : n);
+	while (size > 0)
+	{
+		*b = ('0'+ (size % 10));
+		size /= 10;
+		if (size >= 10)
+			--b;
+	}
+	if (n < 0)
+		*b = '-';
+	size = print_s(b);
+	free(a);
+	return (size);
 }
 
 /**
@@ -54,6 +86,8 @@ int _printf(const char *format, ...)
 				i += print_c(va_arg(lis, int));
 			else if (*a == 's')
 				i += print_s(va_arg(lis, char *));
+			else if (*a == 'd' || *a == 'i')
+				i += print_d(va_arg(lis, int));
 			else if (*a == '%')
 				i += print_c('%');
 			else
