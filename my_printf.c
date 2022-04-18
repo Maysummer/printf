@@ -25,6 +25,8 @@ int print_s(char *a)
 
 	int i = 0;
 
+	if (a == NULL)
+		return (0);
 	while (a[i] != '\0')
 		i++;
 	return (write(1, a, i));

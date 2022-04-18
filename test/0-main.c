@@ -12,14 +12,13 @@ int main(void)
 	int len;
 	int len2;
 	char a = 'q';
-	/*char*p = NULL;*/
+	char*p = NULL;
 
 	len = _printf("Let's try to printf a simple sentence.\n");
 	len2 = printf("Let's try to printf a simple sentence.\n");
 	_printf("\n");
 	printf("\n");
-	/*_printf("%s\n", p);
-	printf("%s\n", p);*/
+	_printf("%s\n", p);
 	_printf("abc%c\n", a);
 	_printf("Length:[%d, %i]\n", len, len);
 	printf("Length:[%d, %i]\n", len2, len2);
