@@ -20,7 +20,7 @@ int print_c(char a)
  */
 int check_flags(char *a, va_list lis)
 {
-	int i = 0;
+	int i = 0, x;
 
 	while (*a != '\0')
 	{
@@ -28,30 +28,33 @@ int check_flags(char *a, va_list lis)
 		{
 			a++;
 			if (*a == 'c')
-				i += print_c(va_arg(lis, int));
+				x = print_c(va_arg(lis, int));
 			else if (*a == 'b')
-				i += print_b(va_arg(lis, unsigned int));
+				x = print_b(va_arg(lis, unsigned int));
 			else if (*a == 'x' || *a == 'X')
-				i += print_x(va_arg(lis, unsigned int)
+				x = print_x(va_arg(lis, unsigned int)
 						, *a == 'x');
 			else if (*a == 'o')
-				i += print_o(va_arg(lis, unsigned int));
+				x = print_o(va_arg(lis, unsigned int));
 			else if (*a == 'u')
-				i += print_u(va_arg(lis, unsigned int));
+				x = print_u(va_arg(lis, unsigned int));
 			else if (*a == 's')
-				i += print_s(va_arg(lis, char *));
+				x = print_s(va_arg(lis, char *));
 			else if (*a == 'd' || *a == 'i')
-				i += print_d(va_arg(lis, int));
+				x = print_d(va_arg(lis, int));
 			else if (*a == '%')
-				i += print_c('%');
+				x = print_c('%');
 			else
 			{
-				i += print_c('%');
-				i += print_c(*a);
+				x = print_c('%');
+				x += print_c(*a);
 			}
 		}
 		else
-			i += print_c(*a);
+			x = print_c(*a);
+		if (x == -1)
+			return (x);
+		i += x;
 		a++;
 	}
 	return (i);
