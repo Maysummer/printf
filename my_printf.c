@@ -12,55 +12,16 @@ int print_c(char a)
 }
 
 /**
- * print_d - prints an decimal number
- * @n: the number to be printed
+ * check_flags - checks for flags
+ * @a: pointer to format string
+ * @lis: pointer to va_list
  *
- * Return: bytes printed
+ * Return: number of bytes printed
  */
-int print_d(int n)
-{
-	int size = sizeof(int) == 4 ? 10 : 5;
-	char *a, *b;
-
-	if (n < 0)
-		size += 1;
-	a = malloc(sizeof(char) * size);
-	if (a == NULL)
-		return (0);
-	b = &a[size - 1];
-	size = (n < 0 ? -n : n);
-	while (size > 0)
-	{
-		*b = ('0' + (size % 10));
-		if (size >= 10)
-			--b;
-		size /= 10;
-	}
-	if (n < 0)
-	{
-		--b;
-		*b = '-';
-	}
-	size = print_s(b);
-	free(a);
-	return (size);
-}
-
-/**
- * _printf - printf that handles c, s and %
- * @format: format of the printf
- *
- * Return: the number of printed characters
- */
-int _printf(const char *format, ...)
+int check_flags(char *a, va_list lis)
 {
 	int i = 0;
-	va_list lis;
-	char *a = (char *) format;
 
-	if (format == NULL)
-		return (0);
-	va_start(lis, format);
 	while (*a != '\0')
 	{
 		if (*a == '%')
@@ -68,8 +29,15 @@ int _printf(const char *format, ...)
 			a++;
 			if (*a == 'c')
 				i += print_c(va_arg(lis, int));
-			if (*a == 'b')
+			else if (*a == 'b')
 				i += print_b(va_arg(lis, unsigned int));
+			else if (*a == 'x' || *a == 'X')
+				i += print_x(va_arg(lis, unsigned int)
+						, *a == 'x');
+			else if (*a == 'o')
+				i += print_o(va_arg(lis, unsigned int));
+			else if (*a == 'u')
+				i += print_u(va_arg(lis, unsigned int));
 			else if (*a == 's')
 				i += print_s(va_arg(lis, char *));
 			else if (*a == 'd' || *a == 'i')
@@ -86,6 +54,24 @@ int _printf(const char *format, ...)
 			i += print_c(*a);
 		a++;
 	}
+	return (i);
+}
+/**
+ * _printf - printf that handles c, s and %
+ * @format: format of the printf
+ *
+ * Return: the number of printed characters
+ */
+int _printf(const char *format, ...)
+{
+	int i = 0;
+	va_list lis;
+	char *a = (char *) format;
+
+	if (format == NULL)
+		return (-1);
+	va_start(lis, format);
+	i = check_flags(a, lis);
 	va_end(lis);
 	return (i);
 }
