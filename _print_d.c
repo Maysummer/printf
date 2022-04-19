@@ -15,7 +15,7 @@ int print_d(int n)
 		size += 1;
 	a = malloc(sizeof(char) * size);
 	if (a == NULL)
-		return (0);
+		return (-1);
 	b = &a[size - 1];
 	*b = '\0';
 	--b;

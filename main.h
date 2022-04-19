@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int _printf(const char *format, ...);
 int print_b(unsigned int n);
