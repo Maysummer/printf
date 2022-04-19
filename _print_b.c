@@ -2,6 +2,7 @@
 
 /**
  * print_b - prints the binary form of an integer
+ * the unsigned int argument is converted to binary
  * @n: integer to print
  *
  * Return: number of bytes printed
