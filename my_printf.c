@@ -1,8 +1,5 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include <stdarg.h>
-#include <stdio.h>
-
+#include "main.h"
 /**
  * print_c - prints character
  * @a: character
@@ -12,24 +9,6 @@
 int print_c(char a)
 {
 	return (write(1, &a, 1));
-}
-
-/**
- * print_s - prints a string
- * @a: pointer to the string
- *
- * Return: bytes printed
- */
-int print_s(char *a)
-{
-
-	int i = 0;
-
-	if (a == NULL)
-		return (0);
-	while (a[i] != '\0')
-		i++;
-	return (write(1, a, i));
 }
 
 /**
@@ -89,6 +68,8 @@ int _printf(const char *format, ...)
 			a++;
 			if (*a == 'c')
 				i += print_c(va_arg(lis, int));
+			if (*a == 'b')
+				i += print_b(va_arg(lis, unsigned int));
 			else if (*a == 's')
 				i += print_s(va_arg(lis, char *));
 			else if (*a == 'd' || *a == 'i')
