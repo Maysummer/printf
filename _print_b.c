@@ -8,12 +8,17 @@
  */
 int print_b(unsigned int n)
 {
-	char *a = malloc(sizeof(char) * 32), *b;
-	int i = 0;
+	char *a, *b;
+	int i = sizeof(int) == 4 ? 33 : 17;
 
+	a = malloc(sizeof(char) * i);
 	if (a == NULL)
 		return (0);
-	b = &a[31];
+	b = &a[i - 1];
+	*b = '\0';
+	--b;
+	if (n == 0)
+		*b = '0';
 	while (n > 0)
 	{
 		*b = ('0' + (n % 2));

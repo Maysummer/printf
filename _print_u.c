@@ -8,13 +8,17 @@
  */
 int print_u(unsigned int n)
 {
-	int size = sizeof(int) == 4 ? 10 : 5;
+	int size = sizeof(int) == 4 ? 11 : 6;
 	char *a, *b;
 
 	a = malloc(sizeof(char) * size);
 	if (a == NULL)
-		return (0);
+		return (-1);
 	b = &a[size - 1];
+	*b = '\0';
+	--b;
+	if (n == 0)
+		*b = '0';
 	while (n > 0)
 	{
 		*b = ('0' + (n % 10));

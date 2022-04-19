@@ -8,7 +8,7 @@
  */
 int print_d(int n)
 {
-	int size = sizeof(int) == 4 ? 10 : 5;
+	int size = sizeof(int) == 4 ? 11 : 6;
 	char *a, *b;
 
 	if (n < 0)
@@ -17,6 +17,10 @@ int print_d(int n)
 	if (a == NULL)
 		return (0);
 	b = &a[size - 1];
+	*b = '\0';
+	--b;
+	if (n == 0)
+		*b = '0';
 	size = (n < 0 ? -n : n);
 	while (size > 0)
 	{

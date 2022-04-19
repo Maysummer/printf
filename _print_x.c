@@ -9,12 +9,17 @@
  */
 int print_x(unsigned int n, short flag)
 {
-	char *a = malloc(sizeof(char) * 9), *b;
-	int i = 0;
+	char *a, *b;
+	int i = sizeof(int) == 4 ? 10 : 6;
 
+	a = malloc(sizeof(char) * i);
 	if (a == NULL)
 		return (0);
-	b = &a[31];
+	b = &a[i - 1];
+	*b = '\0';
+	--b;
+	if (n == 0)
+		*b = '0';
 	while (n > 0)
 	{
 		i =  (n % 16);
