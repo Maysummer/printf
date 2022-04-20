@@ -12,7 +12,7 @@ int print_s(char *a, char *buff)
 	int i = 0;
 
 	if (a == NULL)
-		return (-1);
+		return (print_s("(null)", buff));
 	while (a[i] != '\0')
 	{
 		*buff = a[i];
