@@ -55,14 +55,14 @@ int _printf(const char *format, ...)
 	if (format == NULL || buff == NULL)
 		return (-1);
 	va_start(lis, format);
-	while(*a != '\0')
+	while (*a != '\0')
 	{
 		x = 0;
 		if (*a == '%')
 		{
 			a++;
 			if (*a != '\0')
-				x = check_flags(a, lis, buff);
+				x = check_flags(a, lis, &buff[i]);
 			else
 				break;
 			i += x;
