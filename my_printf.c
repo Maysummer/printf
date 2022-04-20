@@ -1,57 +1,48 @@
 #include <stdarg.h>
 #include "main.h"
-/**
- * print_c - prints character
- * @a: character
- *
- * Return: bytes printed
- */
-int print_c(char a)
-{
-	return (write(1, &a, 1));
-}
 
 /**
  * check_flags - checks for flags
  * @a: pointer to format string
  * @lis: pointer to va_list
+ * @buff: for printing
  *
  * Return: number of bytes printed
  */
-int check_flags(char *a, va_list lis)
+int check_flags(char *a, va_list lis, char *buff)
 {
 	int i = 0, x;
 
 	while (*a != '\0')
 	{
+		x = 0;
 		if (*a == '%')
 		{
 			a++;
 			if (*a == 'c')
-				x = print_c(va_arg(lis, int));
+				buff[i++] = (char)va_arg(lis, int);
 			else if (*a == 'b')
-				x = print_b(va_arg(lis, unsigned int));
+				x = print_b(va_arg(lis, unsigned int), &buff[i]);
 			else if (*a == 'x' || *a == 'X')
-				x = print_x(va_arg(lis, unsigned int)
-						, *a == 'x');
+				x = print_x(va_arg(lis, unsigned int), *a == 'x', &buff[i]);
 			else if (*a == 'o')
-				x = print_o(va_arg(lis, unsigned int));
+				x = print_o(va_arg(lis, unsigned int), &buff[i]);
 			else if (*a == 'u')
-				x = print_u(va_arg(lis, unsigned int));
+				x = print_u(va_arg(lis, unsigned int), &buff[i]);
 			else if (*a == 's')
-				x = print_s(va_arg(lis, char *));
+				x = print_s(va_arg(lis, char *), &buff[i]);
 			else if (*a == 'd' || *a == 'i')
-				x = print_d(va_arg(lis, int));
+				x = print_d(va_arg(lis, int), &buff[i]);
 			else if (*a == '%')
-				x = print_c('%');
+				buff[i++] = '%';
 			else
 			{
-				x = print_c('%');
-				x += print_c(*a);
+				buff[i++] = '%';
+				buff[i++] = *a;
 			}
 		}
 		else
-			x = print_c(*a);
+			buff[i++] = *a;
 		if (x == -1)
 			return (x);
 		i += x;
@@ -69,12 +60,15 @@ int _printf(const char *format, ...)
 {
 	int i = 0;
 	va_list lis;
-	char *a = (char *) format;
+	char *a = (char *)format, *buff = malloc(sizeof(char) * 1024);
 
-	if (format == NULL)
+	if (format == NULL || buff == NULL)
 		return (-1);
 	va_start(lis, format);
-	i = check_flags(a, lis);
+	i = check_flags(a, lis, buff);
+	if (i > 0)
+		write(1, buff, i);
 	va_end(lis);
+	free(buff);
 	return (i);
 }

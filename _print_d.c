@@ -3,10 +3,11 @@
 /**
  * print_d - prints an decimal number
  * @n: the number to be printed
+ * @buff: buffer for printing
  *
  * Return: bytes printed
  */
-int print_d(int n)
+int print_d(int n, char *buff)
 {
 	int size = sizeof(int) == 4 ? 11 : 6;
 	char *a, *b;
@@ -34,7 +35,7 @@ int print_d(int n)
 		--b;
 		*b = '-';
 	}
-	size = print_s(b);
+	size = print_s(b, buff);
 	free(a);
 	return (size);
 }

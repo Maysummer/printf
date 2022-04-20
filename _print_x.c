@@ -4,10 +4,11 @@
  * print_x - prints the hex form of an integer
  * @n: integer to print
  * @flag: to show the case of letters
+ * @buff: buffer for printing
  *
  * Return: number of bytes printed
  */
-int print_x(unsigned int n, short flag)
+int print_x(unsigned int n, short flag, char *buff)
 {
 	char *a, *b;
 	int i = sizeof(int) == 4 ? 10 : 6;
@@ -36,7 +37,7 @@ int print_x(unsigned int n, short flag)
 			--b;
 		n /= 16;
 	}
-	i = print_s(b);
+	i = print_s(b, buff);
 	free(a);
 	return (i);
 }

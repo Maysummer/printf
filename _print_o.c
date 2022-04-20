@@ -3,10 +3,11 @@
 /**
  * print_o - prints the octal form of an integer
  * @n: integer to print
+ * @buff: buffer for printing
  *
  * Return: number of bytes printed
  */
-int print_o(unsigned int n)
+int print_o(unsigned int n, char *buff)
 {
 	char *a, *b;
 	int i = sizeof(int) == 4 ? 12 : 7;
@@ -26,7 +27,7 @@ int print_o(unsigned int n)
 			--b;
 		n /= 8;
 	}
-	i = print_s(b);
+	i = print_s(b, buff);
 	free(a);
 	return (i);
 }

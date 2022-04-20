@@ -3,10 +3,11 @@
 /**
  * print_u - prints an unsigned decimal number
  * @n: the number to be printed
+ * @buff: buffer for printing
  *
  * Return: bytes printed
  */
-int print_u(unsigned int n)
+int print_u(unsigned int n, char *buff)
 {
 	int size = sizeof(int) == 4 ? 11 : 6;
 	char *a, *b;
@@ -26,7 +27,7 @@ int print_u(unsigned int n)
 			--b;
 		n /= 10;
 	}
-	size = print_s(b);
+	size = print_s(b, buff);
 	free(a);
 	return (size);
 }
