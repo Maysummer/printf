@@ -7,7 +7,7 @@
  *
  * Return: bytes printed
  */
-int print_d(int n, char *buff)
+int print_d(long int n, char *buff)
 {
 	int size = sizeof(int) == 4 ? 11 : 6;
 	char *a, *b;
@@ -23,7 +23,7 @@ int print_d(int n, char *buff)
 	if (n == 0)
 		*b = '0';
 	size = (n < 0 ? (0 - n) : n);
-	if (n <= INT_MIN)
+	if (n <= INT_MIN || n >= INT_MAX)
 		size = INT_MAX;
 	while (size > 0)
 	{
