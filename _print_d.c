@@ -22,8 +22,8 @@ int print_d(int n, char *buff)
 	--b;
 	if (n == 0)
 		*b = '0';
-	size = (n < 0 ? -n : n);
-	if (n == INT_MIN)
+	size = (n < 0 ? (0 - n) : n);
+	if (n <= INT_MIN)
 		size = INT_MAX;
 	while (size > 0)
 	{
