@@ -23,6 +23,12 @@ int print_d(int n, char *buff)
 	if (n == 0)
 		*b = '0';
 	size = (n < 0 ? (0 - n) : n);
+	if (n <= INT_MIN)
+	{
+		*b = '8';
+		b--;
+		size = 214748364;
+	}
 	while (size > 0)
 	{
 		*b = ('0' + (size % 10));
