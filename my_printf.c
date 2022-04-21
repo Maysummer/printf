@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
 	char *a = (char *)format, *buff = malloc(sizeof(char) * 2048);
 
 	if (format == NULL ||/buff == NULL || *a == '\0')
-		return (-1);
+		return (1);
 	va_start(lis, format);
 	while (*a != '\0')
 	{
