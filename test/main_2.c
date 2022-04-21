@@ -11,9 +11,8 @@ int main(void)
 {
 	int len, len2;
 
-	len = _printf("");
-	len2 = printf("");
-	printf("%d - len, %d - len2\n", len, len2); 
+	len = _printf("%S", "\x01\x02\x03\x04\x05\x06\x07");
+	len2 = printf("\\x01\\x02\\x03\\x04\\x05\\x06\\x07");
 	fflush(stdout);
 	if (len != len2)
 	{

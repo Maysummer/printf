@@ -50,10 +50,10 @@ int _printf(const char *format, ...)
 {
 	int i = 0, x;
 	va_list lis;
-	char *a = (char *)format, *buff = malloc(sizeof(char) * 2000);
+	char *a = (char *)format, *buff = malloc(sizeof(char) * 2048);
 
-	if (format == NULL || buff == NULL)
-		return (-1);
+	if (format == NULL || buff == NULL || *a == '\0')
+		return (0);
 	va_start(lis, format);
 	while (*a != '\0')
 	{
