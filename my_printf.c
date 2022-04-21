@@ -52,8 +52,8 @@ int _printf(const char *format, ...)
 	va_list lis;
 	char *a = (char *)format, *buff = malloc(sizeof(char) * 2048);
 
-	if (/*format == NULL ||/buff == NULL || */*a == '\0')
-		return (1);
+	/*if (format == NULL ||/buff == NULL || *a == '\0')
+		return (1);*/
 	va_start(lis, format);
 	while (*a != '\0')
 	{
