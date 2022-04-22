@@ -14,6 +14,7 @@ int main(void)
 	len = _printf("%S", "\x01\x02\x03\x04\x05\x06\x07");
 	len2 = printf("\\x01\\x02\\x03\\x04\\x05\\x06\\x07");
 	fflush(stdout);
+	_printf("\n%p\n", (void *)0x7ffe637541f0);
 	if (len != len2)
 	{
 		printf("Lengths differ.\n");

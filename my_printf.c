@@ -25,6 +25,8 @@ int check_flags(char *a, va_list lis, char *buff)
 		x = print_u(va_arg(lis, unsigned int), &buff[i]);
 	else if (*a == 's')
 		x = print_s(va_arg(lis, char *), &buff[i]);
+	else if (*a == 'p')
+		x = print_p(va_arg(lis, void *), &buff[i]);
 	else if (*a == 'S')
 		x = print_S(va_arg(lis, char *), &buff[i]);
 	else if (*a == 'd' || *a == 'i')
